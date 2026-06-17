@@ -1,0 +1,114 @@
+---
+title: "Understanding Dijkstra's Algorithm"
+date: "2026-06-14"
+description: "A rigorous walkthrough of Dijkstra's shortest path algorithm with correctness proof, complexity analysis, and optimized implementation."
+tags: ["Algorithms", "Graph Theory"]
+featured: true
+---
+
+## Problem Statement
+
+Given a weighted directed graph $G = (V, E)$ with non-negative edge weights $w: E \to \mathbb{R}_{\geq 0}$ and a source vertex $s \in V$, find the shortest path from $s$ to every other vertex.
+
+## The Algorithm
+
+Dijkstra's algorithm maintains a set $S$ of vertices whose shortest-path distances are known, and a priority queue $Q$ of tentative distances:
+
+1. Initialize $d(s) = 0$ and $d(v) = \infty$ for all $v \neq s$
+2. While $Q \neq \emptyset$:
+   - Extract $u = \arg\min_{v \in Q} d(v)$
+   - For each neighbor $v$ of $u$: **relax** the edge $(u, v)$
+
+The **relaxation** step:
+
+$$
+\text{if } d(u) + w(u, v) < d(v): \quad d(v) \leftarrow d(u) + w(u, v)
+$$
+
+## Correctness (Sketch)
+
+**Claim**: When vertex $u$ is extracted from $Q$, $d(u)$ equals the true shortest-path distance $\delta(s, u)$.
+
+**Proof** (by contradiction): Suppose $u$ is the first vertex extracted with $d(u) > \delta(s, u)$. Then there exists a shorter path $s \leadsto x \to y \leadsto u$ where $y \notin S$. But since $y$ was in $Q$ and $d(y) \leq \delta(s, y) \leq \delta(s, u) < d(u)$, the algorithm would have extracted $y$ before $u$ — contradiction. $\blacksquare$
+
+## Complexity
+
+With a binary heap priority queue:
+
+$$
+T(n, m) = O((n + m) \log n)
+$$
+
+With a Fibonacci heap:
+
+$$
+T(n, m) = O(m + n \log n)
+$$
+
+## Implementation (C++)
+
+```cpp
+#include <vector>
+#include <queue>
+#include <limits>
+
+using namespace std;
+using pii = pair<int, int>;  // (distance, vertex)
+
+vector<int> dijkstra(const vector<vector<pii>>& adj, int src) {
+    int n = adj.size();
+    vector<int> dist(n, numeric_limits<int>::max());
+    priority_queue<pii, vector<pii>, greater<pii>> pq;
+
+    dist[src] = 0;
+    pq.push({0, src});
+
+    while (!pq.empty()) {
+        auto [d, u] = pq.top();
+        pq.pop();
+
+        if (d > dist[u]) continue;  // stale entry
+
+        for (auto [w, v] : adj[u]) {
+            if (dist[u] + w < dist[v]) {
+                dist[v] = dist[u] + w;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    return dist;
+}
+```
+
+## Python Implementation
+
+```python
+import heapq
+from typing import List, Dict, Tuple
+
+def dijkstra(graph: Dict[int, List[Tuple[int, int]]], src: int) -> Dict[int, int]:
+    """
+    graph: adjacency list {u: [(weight, v), ...]}
+    Returns: shortest distances from src
+    """
+    dist = {src: 0}
+    pq = [(0, src)]
+
+    while pq:
+        d, u = heapq.heappop(pq)
+        if d > dist.get(u, float('inf')):
+            continue
+
+        for w, v in graph.get(u, []):
+            new_dist = d + w
+            if new_dist < dist.get(v, float('inf')):
+                dist[v] = new_dist
+                heapq.heappush(pq, (new_dist, v))
+
+    return dist
+```
+
+## Key Insight
+
+Dijkstra's works because of the **greedy choice property**: the shortest path to any vertex can be decomposed into shortest sub-paths. This fails with negative weights — use Bellman-Ford instead.

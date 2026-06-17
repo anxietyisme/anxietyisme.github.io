@@ -1,26 +1,134 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ─── Academic Minimalist Theme ─── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-accent: var(--link);
+  --color-border: var(--border-color);
+  --color-muted: var(--muted-text);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Light Mode (Default) ─── */
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --link: #0000ee;
+  --border-color: #e5e7eb;
+  --muted-text: #666666;
 }
 
+/* ─── Dark Mode ─── */
+[data-theme="dark"] {
+  --bg: #000000;
+  --fg: #eeeeee;
+  --link: #8ab4f8;
+  --border-color: #333333;
+  --muted-text: #999999;
+}
+
+/* ─── Base ─── */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  /* Standard academic font stack: Georgia/Times or system serif */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: #ffff00;
+  color: #000;
+}
+[data-theme="dark"] ::selection {
+  background: #555555;
+  color: #fff;
+}
+
+/* ─── KaTeX Display Math ─── */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem 0;
+  margin: 1rem 0;
+}
+
+/* ─── MDX Prose Styling (LaTeX inspired) ─── */
+.prose {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 65ch;
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  color: var(--fg);
+  font-weight: 500;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
+.prose h1 {
+  font-size: 1.8rem;
+}
+.prose h2 {
+  font-size: 1.4rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.3em;
+}
+.prose h3 {
+  font-size: 1.2rem;
+}
+.prose p {
+  margin-bottom: 1.25em;
+}
+.prose a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose a:hover {
+  text-decoration-thickness: 2px;
+}
+.prose blockquote {
+  border-left: 2px solid var(--border-color);
+  padding-left: 1em;
+  color: var(--muted-text);
+  margin: 1.5em 0;
+}
+.prose ul, .prose ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+}
+.prose li {
+  margin-bottom: 0.5em;
+}
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2em 0;
+}
+.prose img {
+  margin: 1.5em 0;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ─── Code Blocks (rehype-pretty-code) ─── */
+.prose pre {
+  background: #f6f8fa !important;
+  padding: 1em;
+  margin: 1.5em 0;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+[data-theme="dark"] .prose pre {
+  background: #0a0a0a !important;
+}
+
+.prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
 }

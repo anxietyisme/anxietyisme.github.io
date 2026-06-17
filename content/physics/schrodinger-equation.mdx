@@ -1,0 +1,92 @@
+---
+title: "The Schrödinger Equation: From Classical to Quantum"
+date: "2026-06-12"
+description: "Deriving the time-dependent Schrödinger equation from the de Broglie hypothesis and the classical wave equation."
+tags: ["Quantum Mechanics", "Derivation"]
+featured: true
+---
+
+## The Classical Wave Equation
+
+In classical mechanics, a wave traveling in one dimension satisfies:
+
+$$
+\frac{\partial^2 \psi}{\partial x^2} = \frac{1}{v^2} \frac{\partial^2 \psi}{\partial t^2}
+$$
+
+For a plane wave $\psi(x, t) = A e^{i(kx - \omega t)}$, we have $k = 2\pi/\lambda$ and $\omega = 2\pi\nu$.
+
+## The de Broglie Relations
+
+Louis de Broglie proposed that all matter has wave-like properties:
+
+$$
+\lambda = \frac{h}{p}, \qquad E = h\nu = \hbar\omega
+$$
+
+Combining with the momentum-energy relation for a free particle ($E = p^2/2m$):
+
+$$
+\hbar\omega = \frac{\hbar^2 k^2}{2m}
+$$
+
+## Deriving the Schrödinger Equation
+
+Starting from the free-particle plane wave:
+
+$$
+\psi(x, t) = A \exp\left[i\left(\frac{p}{\hbar}x - \frac{E}{\hbar}t\right)\right]
+$$
+
+Taking derivatives:
+
+$$
+\frac{\partial \psi}{\partial t} = -\frac{iE}{\hbar}\psi, \qquad \frac{\partial^2 \psi}{\partial x^2} = -\frac{p^2}{\hbar^2}\psi
+$$
+
+Substituting $E = p^2/2m + V(x)$ and rearranging, we arrive at the **time-dependent Schrödinger equation**:
+
+$$
+\boxed{i\hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2 \psi}{\partial x^2} + V(x)\psi}
+$$
+
+## Numerical Solution: Particle in a Box
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Infinite square well: V=0 for 0 < x < L, V=∞ elsewhere
+L = 1.0  # Box width
+N = 1000  # Grid points
+x = np.linspace(0, L, N)
+
+# Analytical eigenstates
+def psi_n(n: int, x: np.ndarray, L: float) -> np.ndarray:
+    return np.sqrt(2/L) * np.sin(n * np.pi * x / L)
+
+def E_n(n: int, L: float, m: float = 1.0, hbar: float = 1.0) -> float:
+    return (n * np.pi * hbar) ** 2 / (2 * m * L ** 2)
+
+# Plot first 4 eigenstates
+for n in range(1, 5):
+    psi = psi_n(n, x, L)
+    energy = E_n(n, L)
+    plt.plot(x, psi + energy, label=f"n={n}, E={energy:.2f}")
+
+plt.xlabel("x")
+plt.ylabel("ψ(x) + E_n")
+plt.title("Particle in a Box — Eigenstates")
+plt.legend()
+plt.show()
+```
+
+## The Uncertainty Principle
+
+A direct consequence of the Schrödinger equation and the commutation relation $[\hat{x}, \hat{p}] = i\hbar$ is the Heisenberg uncertainty principle:
+
+$$
+\Delta x \cdot \Delta p \geq \frac{\hbar}{2}
+$$
+
+This is not a statement about measurement limitations — it is a fundamental property of quantum states.
