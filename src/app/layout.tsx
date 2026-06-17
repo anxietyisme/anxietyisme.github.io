@@ -58,7 +58,7 @@ export default function RootLayout({
           <Search allNotes={allNotes} />
           <MobileMenu mathNotes={mathNotes} physicsNotes={physicsNotes} csNotes={csNotes} />
           
-          <div className="flex flex-col md:flex-row max-w-6xl mx-auto min-h-screen">
+          <div className="flex flex-col md:flex-row max-w-[90rem] mx-auto min-h-screen">
             {/* Sidebar (hidden on mobile) */}
             <aside className="hidden md:block w-72 shrink-0 border-r border-border p-6 md:py-12 md:pr-12">
               <Sidebar
@@ -68,7 +68,7 @@ export default function RootLayout({
               />
             </aside>
             {/* Main Content */}
-            <main className="flex-1 w-full max-w-3xl flex flex-col p-6 md:py-12 md:px-12">
+            <main className="flex-1 w-full max-w-5xl flex flex-col p-6 md:py-12 md:px-12">
               <div className="flex-1">
                 {children}
               </div>

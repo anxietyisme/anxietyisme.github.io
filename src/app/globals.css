@@ -59,7 +59,7 @@ body {
   font-family: Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 1.125rem;
   line-height: 1.7;
-  max-width: 65ch;
+  max-width: 85ch;
 }
 .prose h1, .prose h2, .prose h3, .prose h4 {
   font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
