@@ -1,9 +1,20 @@
 import type { MDXComponents } from "mdx/types";
 import { HandwrittenSketch } from "./HandwrittenSketch";
+import { Theorem, Lemma, Definition, Proof, Remark, Example } from "./AcademicBoxes";
+import { CodeBlock } from "./CodeBlock";
 
 export function getMDXComponents(): MDXComponents {
   return {
+    // Custom components
     HandwrittenSketch,
+    Theorem,
+    Lemma,
+    Definition,
+    Proof,
+    Remark,
+    Example,
+    // Code block with copy button
+    pre: (props) => <CodeBlock {...props} />,
     // Override default elements for consistent styling
     h1: (props) => (
       <h1 className="text-2xl font-bold tracking-tight mb-2" {...props} />

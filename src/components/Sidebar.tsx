@@ -181,13 +181,14 @@ export function Sidebar({ mathNotes, physicsNotes, csNotes }: SidebarProps) {
     { href: "/physics", label: "Physics", notes: physicsNotes },
     { href: "/cs", label: "Computer Science", notes: csNotes },
     { href: "/projects", label: "Projects" },
+    { href: "/tags", label: "Tags" },
     { href: "/about", label: "About" },
   ];
 
   return (
     <nav className="flex flex-col h-full">
       <div className="mb-8">
-        <h1 className="text-xl font-medium tracking-tight">Aniket</h1>
+        <h1 className="text-xl font-medium tracking-tight">anxiety</h1>
         <p className="text-sm text-muted mt-1">Academic Notebook</p>
       </div>
 

@@ -48,7 +48,7 @@ export function getNotes(category: string): NoteEntry[] {
 }
 
 /**
- * Returns a single note's MDX source and parsed frontmatter.
+ * Returns a single note's MDX source, parsed frontmatter, and prev/next links.
  */
 export function getNote(category: string, slug: string) {
   const filePath = path.join(contentDir, category, `${slug}.mdx`);
@@ -58,9 +58,17 @@ export function getNote(category: string, slug: string) {
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
 
+  // Get neighbors
+  const allNotes = getNotes(category);
+  const index = allNotes.findIndex((n) => n.slug === slug);
+  const prev = index > 0 ? allNotes[index - 1] : null;
+  const next = index < allNotes.length - 1 ? allNotes[index + 1] : null;
+
   return {
     frontmatter: data as NoteFrontmatter,
     content,
+    prev,
+    next,
   };
 }
 
@@ -98,4 +106,27 @@ export function getRecentNotes(limit: number = 6): (NoteEntry & { category: stri
         new Date(a.frontmatter.date).getTime()
     )
     .slice(0, limit);
+}
+/**
+ * Returns all tags across all categories, with their frequencies and associated notes.
+ */
+export function getAllTags() {
+  const allNotes = getRecentNotes(1000); // Get all notes
+  const tagMap = new Map<string, { count: number; notes: (NoteEntry & { category: string })[] }>();
+
+  allNotes.forEach((note) => {
+    const tags = note.frontmatter.tags || [];
+    tags.forEach((tag) => {
+      if (!tagMap.has(tag)) {
+        tagMap.set(tag, { count: 0, notes: [] });
+      }
+      const entry = tagMap.get(tag)!;
+      entry.count += 1;
+      entry.notes.push(note);
+    });
+  });
+
+  return Array.from(tagMap.entries())
+    .map(([tag, data]) => ({ tag, ...data }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
 }

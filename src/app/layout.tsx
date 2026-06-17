@@ -2,13 +2,17 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Sidebar } from "@/components/Sidebar";
 import { Footer } from "@/components/Footer";
-import { getNotes } from "@/lib/mdx";
+import { MobileMenu } from "@/components/MobileMenu";
+import { Search } from "@/components/Search";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { BackToTop } from "@/components/BackToTop";
+import { getNotes, getRecentNotes } from "@/lib/mdx";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Aniket — Notes",
-    template: "%s | Aniket",
+    default: "anxiety — Notes",
+    template: "%s | anxiety",
   },
   description:
     "Academic notes on mathematics, physics, and computer science.",
@@ -30,6 +34,14 @@ export default function RootLayout({
   const physicsNotes = getNotes("physics").map(mapNote);
   const csNotes = getNotes("cs").map(mapNote);
 
+  // For search
+  const allNotes = getRecentNotes(1000).map((n) => ({
+    slug: n.slug,
+    category: n.category,
+    title: n.frontmatter.title,
+    description: n.frontmatter.description,
+  }));
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -41,9 +53,14 @@ export default function RootLayout({
       </head>
       <body className="antialiased min-h-screen">
         <ThemeProvider>
+          <ScrollProgress />
+          <BackToTop />
+          <Search allNotes={allNotes} />
+          <MobileMenu mathNotes={mathNotes} physicsNotes={physicsNotes} csNotes={csNotes} />
+          
           <div className="flex flex-col md:flex-row max-w-6xl mx-auto min-h-screen">
-            {/* Sidebar */}
-            <aside className="w-full md:w-72 shrink-0 border-b md:border-b-0 md:border-r border-border p-6 md:py-12 md:pr-12">
+            {/* Sidebar (hidden on mobile) */}
+            <aside className="hidden md:block w-72 shrink-0 border-r border-border p-6 md:py-12 md:pr-12">
               <Sidebar
                 mathNotes={mathNotes}
                 physicsNotes={physicsNotes}
