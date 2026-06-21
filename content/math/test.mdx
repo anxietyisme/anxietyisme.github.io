@@ -1,0 +1,181 @@
+---
+title: "Website Features Showcase"
+date: "2026-06-21"
+description: "A complete guide on how to use all the MDX features available in your academic notebook."
+tags: ["Test", "Showcase"]
+---
+
+Welcome to your academic notebook! This page demonstrates every custom feature available in your `.mdx` files and shows you exactly how to type them.
+
+---
+
+## 1. Typography & Markdown
+
+Standard Markdown works perfectly. You can use **bold**, *italics*, and `inline code`.
+
+### Blockquotes
+> "Mathematics is the queen of the sciences and number theory is the queen of mathematics."
+> — Carl Friedrich Gauss
+
+### Lists
+- Unordered item 1
+- Unordered item 2
+  - Nested item
+
+1. Ordered item 1
+2. Ordered item 2
+
+---
+
+## 2. Mathematical Equations (KaTeX)
+
+You can write LaTeX-style math natively. 
+
+**Inline math:** The equation $E = mc^2$ is an inline equation.
+
+**Display math:** Use double dollar signs for standalone equations.
+
+$$
+\mathcal{L} = \bar{\psi}(i\gamma^\mu\partial_\mu - m)\psi
+$$
+
+---
+
+## 3. Academic Boxes
+
+You have several custom React components to format mathematical and academic structures. Use them like HTML tags!
+
+### Theorem
+```mdx
+<Theorem title="Pythagorean Theorem">
+  In a right-angled triangle, the square of the hypotenuse side is equal to the sum of squares of the other two sides: $a^2 + b^2 = c^2$.
+</Theorem>
+```
+<Theorem title="Pythagorean Theorem">
+  In a right-angled triangle, the square of the hypotenuse side is equal to the sum of squares of the other two sides: $a^2 + b^2 = c^2$.
+</Theorem>
+
+### Definition
+```mdx
+<Definition title="Topological Space">
+  A topological space is an ordered pair $(X, \tau)$ where $X$ is a set and $\tau$ is a collection of subsets of $X$ satisfying certain axioms.
+</Definition>
+```
+<Definition title="Topological Space">
+  A topological space is an ordered pair $(X, \tau)$ where $X$ is a set and $\tau$ is a collection of subsets of $X$ satisfying certain axioms.
+</Definition>
+
+### Proof
+```mdx
+<Proof>
+  Assume $a^2$ is even. Then $a^2 = 2k$ for some integer $k$. 
+  By contradiction, if $a$ were odd, $a = 2m + 1$, then $a^2 = 4m^2 + 4m + 1 = 2(2m^2 + 2m) + 1$, which is odd. 
+  Thus $a$ must be even.
+</Proof>
+```
+<Proof>
+  Assume $a^2$ is even. Then $a^2 = 2k$ for some integer $k$. 
+  By contradiction, if $a$ were odd, $a = 2m + 1$, then $a^2 = 4m^2 + 4m + 1 = 2(2m^2 + 2m) + 1$, which is odd. 
+  Thus $a$ must be even.
+</Proof>
+
+*Other boxes available: `<Lemma>`, `<Remark>`, and `<Example>`.*
+
+---
+
+## 4. Code Blocks with Syntax Highlighting
+
+Fenced code blocks automatically get syntax highlighting and a copy button.
+
+\`\`\`python
+def hello_world():
+    print("Code blocks look great!")
+    return True
+\`\`\`
+
+```python
+def hello_world():
+    print("Code blocks look great!")
+    return True
+```
+
+---
+
+## 5. Mathematical Graphs (Mafs)
+
+Plot beautiful, interactive 2D math graphs.
+
+```mdx
+<MathGraph y="sin(x) * exp(-0.1 * x)" domain={[-10, 10]} />
+```
+<MathGraph y="sin(x) * exp(-0.1 * x)" domain={[-10, 10]} />
+
+You can also plot along the Y-axis:
+```mdx
+<MathGraph x="y * y" domain={[-5, 5]} height={250} />
+```
+<MathGraph x="y * y" domain={[-5, 5]} height={250} />
+
+---
+
+## 6. Diagrams & Flowcharts (Mermaid.js)
+
+Create diagrams easily using Mermaid.js syntax inside the `chart` prop.
+
+```mdx
+<Mermaid chart={`
+graph LR
+    A[Hard Work] --> B(Success)
+    C[Luck] --> B
+`} />
+```
+<Mermaid chart={`
+graph LR
+    A[Hard Work] --> B(Success)
+    C[Luck] --> B
+`} />
+
+---
+
+## 7. Data Charts (Recharts)
+
+Plot arrays of data into line, bar, or area charts.
+
+```mdx
+<DataChart 
+  type="bar" 
+  xKey="name" 
+  yKey="score" 
+  data={[
+    { name: "Math", score: 95 },
+    { name: "Physics", score: 88 },
+    { name: "CS", score: 100 }
+  ]} 
+/>
+```
+
+<DataChart 
+  type="bar" 
+  xKey="name" 
+  yKey="score" 
+  data={[
+    { name: "Math", score: 95 },
+    { name: "Physics", score: 88 },
+    { name: "CS", score: 100 }
+  ]} 
+/>
+
+---
+
+## 8. Handwritten Sketches
+
+If you have scanned sketches or images, you can display them with a caption. Just place the image in your `public` folder.
+
+```mdx
+<HandwrittenSketch 
+  src="/some-image.png" 
+  alt="My diagram" 
+  caption="Figure 1: Diagram drawn on paper." 
+/>
+```
+*(No image shown here to prevent a broken link, but that's how you use it!)*

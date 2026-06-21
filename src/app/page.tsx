@@ -3,15 +3,11 @@ import { getRecentNotes } from "@/lib/mdx";
 
 const projects = [
   {
-    title: "SOMEJET",
-    description: "1:40 scale RC AMCA stealth fighter. Aerodynamic optimization via VLM.",
+    title: "random project placeholder",
+    description: "random project placeholder. ",
     external: "https://github.com",
   },
-  {
-    title: "BYTE TUI",
-    description: "Terminal-based dashboard for system telemetry and AI streaming.",
-    external: "https://github.com",
-  },
+
 ];
 
 export default function HomePage() {
@@ -24,11 +20,10 @@ export default function HomePage() {
         <h1 className="text-2xl font-normal mb-4">Aniket</h1>
         <div className="prose prose-neutral dark:prose-invert">
           <p>
-            I am a student working at the intersection of mathematics, physics, and engineering. 
-            My primary interests lie in algebraic topology, quantum mechanics, and systems programming.
+            aniket is me, i am anxiety
           </p>
           <p>
-            This site serves as an archive for my notes, derivations, and technical projects.
+            this is my website, i write stuff here, or mostly just dump my math
           </p>
         </div>
       </section>

@@ -132,3 +132,61 @@ body {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.9em;
 }
+
+/* ─── Mafs CSS Inject ─── */
+.MafsView {
+  display: block;
+  background: var(--bg);
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  touch-action: none;
+  outline: 0;
+
+  --mafs-fg: var(--fg);
+  --mafs-bg: var(--bg);
+
+  --mafs-origin-color: var(--mafs-fg);
+  --mafs-line-color: var(--border-color);
+  --mafs-line-stroke-dash-style: 4, 3;
+  --mafs-axis-stroke-width: 1px;
+  --grid-line-subdivision-color: rgba(128,128,128,0.2);
+
+  --mafs-red: #f11d0e;
+  --mafs-orange: #f14e0e;
+  --mafs-yellow: #ffe44a;
+  --mafs-green: #15e272;
+  --mafs-blue: #58a6ff;
+  --mafs-indigo: #7c58ff;
+  --mafs-violet: #ae58ff;
+  --mafs-pink: #ee00ab;
+}
+
+[data-theme="dark"] .MafsView {
+  --mafs-line-color: #333333;
+  --grid-line-subdivision-color: #222222;
+}
+
+.MafsView text {
+  fill: var(--mafs-fg);
+  cursor: default;
+}
+
+.MafsView path {
+  stroke: var(--mafs-fg);
+}
+
+.MafsView:focus-visible {
+  border-radius: 5px;
+  outline: 3px solid #58a6ff;
+}
+
+.mafs-shadow {
+  paint-order: stroke;
+  stroke-width: 3px;
+  stroke: var(--mafs-bg);
+  stroke-opacity: 0.75;
+  stroke-linejoin: round;
+}

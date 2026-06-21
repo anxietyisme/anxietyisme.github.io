@@ -15,13 +15,13 @@ export default function MathIndexPage() {
       <div className="mb-12">
         <h1 className="text-3xl font-normal mb-4">Mathematics</h1>
         <div className="text-sm text-muted space-y-1">
-          <p><strong>Focus:</strong> Topology, Algebra, Analysis</p>
-          <p><strong>Level:</strong> Advanced Undergraduate / Graduate</p>
+          <p><strong>Focus:</strong> math stuff here</p>
+          <p><strong>Level:</strong> who cares</p>
         </div>
       </div>
 
-      <h2 className="text-xl font-normal mb-6">Schedule & Notes</h2>
-      
+      <h2 className="text-xl font-normal mb-6">Notes</h2>
+
       {notes.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -51,7 +51,7 @@ export default function MathIndexPage() {
           </table>
         </div>
       ) : (
-        <p className="text-sm text-muted">No math notes yet.</p>
+        <p className="text-sm text-muted">no math notes yet.</p>
       )}
     </div>
   );

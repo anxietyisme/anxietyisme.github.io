@@ -7,25 +7,11 @@ export const metadata: Metadata = {
 
 const projects = [
   {
-    title: "SOMEJET",
-    description: "1:40 scale RC model of India's AMCA stealth fighter. Aerodynamic optimization using 2D panel methods, VLM, and multi-objective differential evolution.",
+    title: "no projects yet",
+    description: "random project placeholder.",
     external: "https://github.com",
   },
-  {
-    title: "BYTE TUI Dashboard",
-    description: "A hacker-style personal intelligence environment with AI streaming, system telemetry, and task management.",
-    external: "https://github.com",
-  },
-  {
-    title: "Topology Visualizer",
-    description: "Interactive WebGL application for visualizing topological spaces, fundamental groups, and covering spaces.",
-    external: "https://github.com",
-  },
-  {
-    title: "Lattice Boltzmann CFD",
-    description: "GPU-accelerated lattice Boltzmann method for 2D fluid dynamics simulation.",
-    external: "https://github.com",
-  },
+
 ];
 
 export default function ProjectsPage() {

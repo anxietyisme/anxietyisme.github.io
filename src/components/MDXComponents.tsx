@@ -2,6 +2,9 @@ import type { MDXComponents } from "mdx/types";
 import { HandwrittenSketch } from "./HandwrittenSketch";
 import { Theorem, Lemma, Definition, Proof, Remark, Example } from "./AcademicBoxes";
 import { CodeBlock } from "./CodeBlock";
+import { Mermaid } from "./Mermaid";
+import { MathGraph } from "./MathGraph";
+import { DataChart } from "./DataChart";
 
 export function getMDXComponents(): MDXComponents {
   return {
@@ -13,6 +16,9 @@ export function getMDXComponents(): MDXComponents {
     Proof,
     Remark,
     Example,
+    Mermaid,
+    MathGraph,
+    DataChart,
     // Code block with copy button
     pre: (props) => <CodeBlock {...props} />,
     // Override default elements for consistent styling
